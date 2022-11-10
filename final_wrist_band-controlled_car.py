@@ -1,6 +1,10 @@
 import modi
 import time
+import datetime
 # modi.update_module_firmware()
+
+ROTATE = 1.0
+
 bundle1 = modi.MODI(
     conn_type= 'ble',
     network_uuid='3D39547C'
@@ -13,8 +17,15 @@ gyro = bundle1.gyros[0]
 motor1=bundle2.motors[0]
 # motor2=bundle2.motors[1]
 
-def rotate_90_degree():
-    pass
+def rotate_90_degree(s):
+    '''
+        This rotates the car by 90 degrees. If the input s is 'R',
+        it rotates Right and if s is 'L', it rotates toward Left.
+    '''
+    start = datetime.datetime.now()
+    while (datetime.datetime.now() - start).seconds < ROTATE:
+        if s=='R': rotate_right(100)
+        if s=='L': rotate_left(100)
 
 def saturate(x):
     if x>100: return 100
